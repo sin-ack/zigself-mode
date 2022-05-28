@@ -161,6 +161,9 @@ but they will be highlighted the same way regardless.")
         (indent-line-to indent-offset)
       (save-excursion (indent-line-to indent-offset)))))
 
+(defconst zigself-electric-indent-chars
+  '(?| ?\) ?. ?\]))
+
 ;;;###autoload
 (define-derived-mode zigself-mode prog-mode "zigSelf"
   "A major mode for zigSelf code in textual form.
@@ -172,7 +175,12 @@ but they will be highlighted the same way regardless.")
   (setq-local comment-start "\"")
   (setq-local comment-end "\"")
   (set-syntax-table zigself-mode-syntax-table)
-  (setq-local indent-line-function #'zigself-mode-indent-line))
+  (setq-local indent-line-function #'zigself-mode-indent-line)
+  (setq-local electric-indent-chars
+              (append zigself-electric-indent-chars
+                      (and (boundp 'electric-indent-chars)
+                           electric-indent-chars))))
+
 
 ;;;###autoload
 (add-to-list 'auto-mode-alist '("\\.self\\'" . zigself-mode))
