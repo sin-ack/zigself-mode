@@ -17,6 +17,7 @@ Clone this repository, and use `use-package` (or `use-package!` on Doom Emacs):
 (use-package zigself-mode
     :load-path "path/to/zigself-mode"
     :hook (zigself-mode . rainbow-delimiters-mode)
+    :mode ("\\.self\\'" . zigself-mode)
     :config
     ;; On Doom Emacs, disable +default-want-RET-continue-comments in order to
     ;; prevent a newline from terminating the current comment and starting a
